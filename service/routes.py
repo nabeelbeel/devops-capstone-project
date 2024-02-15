@@ -61,104 +61,34 @@ def create_accounts():
 # LIST ALL ACCOUNTS
 ######################################################################
 
-
-@app.route("/accounts", methods=["GET"])
-def list_accounts():
-    """
-    List all Accounts
-    This endpoint will list all accounts in the system
-    """
-    app.logger.info("Request to list all Accounts")
-    accounts = Account.all()
-
-    message_list = []
-    for account in accounts:
-        message_list.append(account.serialize())
-
-    return make_response(
-        jsonify(message_list),
-        status.HTTP_200_OK
-    )
+# ... place you code here to LIST accounts ...
 
 
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
 
-@app.route("/accounts/<int:id>", methods=["GET"])
-def read_account(id):
-    """
-    Reads an Account
-    This endpoint will read an Account based on the account ID passed in the URL
-    """
-    app.logger.info("Request to read an Account")
-    account = Account.find(id)
-
-    if not account:
-        message = f"No account with [{id}] was found"
-        return abort(status.HTTP_404_NOT_FOUND, message)
-
-    message = account.serialize()
-
-    return make_response(
-        jsonify(message),
-        status.HTTP_200_OK
-    )
+# ... place you code here to READ an account ...
 
 
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
 
-@app.route("/accounts/<int:id>", methods=["PUT"])
-def update_account(id):
-    """
-    Update an Account
-    This endpoint will update an Account based on the account ID passed in the URL
-    """
-    app.logger.info(f"Request to update an Account {id}")
-    check_content_type("application/json")
-
-    account = Account.find(id)
-
-    if not account:
-        message = f"No account with [{id}] was found"
-        return abort(status.HTTP_404_NOT_FOUND, message)
-
-    account.deserialize(request.get_json())
-    account.update()
-
-    return make_response(
-        "Account has been updated",
-        status.HTTP_200_OK
-    )
+# ... place you code here to UPDATE an account ...
 
 
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
 
-@app.route("/accounts/<int:id>", methods=["DELETE"])
-def delete_account(id):
-    """
-    Deletes an Account
-    This endpoint will delete an Account based on the account ID passed in the URL
-    """
-    app.logger.info("Request to delete an Account with id [{id}]")
-    account = Account.find(id)
-
-    if account:
-        account.delete()
-
-    return make_response(
-        "",
-        status.HTTP_204_NO_CONTENT
-    )
+# ... place you code here to DELETE an account ...
 
 
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
 ######################################################################
+
 
 def check_content_type(media_type):
     """Checks that the media type is correct"""
